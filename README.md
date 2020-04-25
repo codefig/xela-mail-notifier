@@ -1,2 +1,2 @@
 # xela-mail-notifier
-An offline mail notification 
+An offline mail notifier
