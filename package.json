@@ -1,0 +1,25 @@
+{
+  "name": "xela-mail-notifier",
+  "version": "1.0.0",
+  "description": "An email notifier upon successfull message on channels",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "watch": "nodemon index.js"
+  },
+  "author": "Moshood Alaran",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.10",
+    "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.3",
+    "redis": "^3.0.2",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "chalk": "^4.0.0"
+  }
+}
