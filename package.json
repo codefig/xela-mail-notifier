@@ -11,15 +11,17 @@
   "author": "Moshood Alaran",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.10",
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3",
     "redis": "^3.0.2",
-    "validator": "^13.0.0"
+    "rsmq": "^0.12.2",
+    "validator": "^13.0.0",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {
-    "chalk": "^4.0.0"
+    "chalk": "^4.0.0",
+    "dotenv": "^8.2.0"
   }
 }

@@ -1,27 +1,23 @@
 const express = require("express");
-
 const mongooseConnection = require("./config/mongooseConnection");
-// const { createListener } = require("./services/subscriber");
+const { createQueue } = require("./services/queueServer");
 const messageController = require("./controllers/index.controller");
-const publishMessage = require("./services/publisher");
+const { sendNotification } = require("./helpers/utilities");
 const app = express();
-const client = require("redis").createClient();
-const { createListener } = require("./services/subscriber");
-const publisher = require("redis").createClient();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  publishMessage("Good man");
-  res.send("Welcoem to Xela Mail Notifier");
+  res.send("Welcome to Xela Mail Notifier");
 });
 
 app.post("/messages", async (req, res) => {
-  messageController.messageMediator(req, res);
+  messageController.messageHandler(req, res);
+  // res.send("Welldone");
 });
 
-createListener();
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
   mongooseConnection();
+  createQueue();
   console.log("Application started on port: ", PORT);
 });

@@ -1,9 +1,15 @@
 const validator = require("validator");
-const { sendNotification } = require("../helpers/utilities");
-const publishMessage = require("../services/publisher");
 const Message = require("../models/message.model");
+const dotenv = require("dotenv").config();
 
-module.exports.messageMediator = async function (req, res) {
+const RedisMQ = require("rsmq");
+const rsmq = new RedisMQ({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  ns: process.env.REDIS_NS,
+});
+
+module.exports.messageHandler = async function (req, res) {
   try {
     let errors = {};
     if (!req.body.email || !validator.isEmail(req.body.email)) {
@@ -15,10 +21,24 @@ module.exports.messageMediator = async function (req, res) {
     if (Object.keys(errors).length != 0) {
       res.status(401).send({ message: "Validation failed ", errors: errors });
     }
-
-    publishMessage({ email: req.body.email, message: req.body.message });
     let message = await new Message(req.body).save();
-    await sendNotification(req.body.email, req.body.message);
+    rsmq.sendMessage(
+      {
+        qname: process.env.QUEUE_NAME,
+        message: JSON.stringify({
+          email: req.body.email,
+          message: req.body.message,
+        }),
+        delay: 0,
+      },
+      (err) => {
+        if (err) {
+          console.error("Error : ", err);
+          return;
+        }
+      }
+    );
+    console.log("pushed new message into queue");
     res
       .status(201)
       .send({ data: message, message: "Message successfully sent" });
