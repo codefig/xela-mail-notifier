@@ -1,15 +1,12 @@
 const dotenv = require("dotenv").config();
 const { sendNotification } = require("../helpers/utilities");
-const RedisMQ = require("rsmq");
-const rsmq = new RedisMQ({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-  ns: process.env.REDIS_NS,
-});
+const { rsmq } = require("../config/redisConfig");
+
 function receiveMessage() {
   setInterval(function () {
     rsmq.receiveMessage({ qname: process.env.QUEUE_NAME }, (err, resp) => {
       if (err) {
+        console.log("Error : ");
         console.error(err);
         return;
       }
@@ -37,7 +34,7 @@ function receiveMessage() {
         console.log("no message in queue");
       }
     });
-  }, 5000);
+  }, 2000);
 }
 
 receiveMessage();

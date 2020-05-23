@@ -2,13 +2,8 @@ const validator = require("validator");
 const Message = require("../models/message.model");
 const dotenv = require("dotenv").config();
 
-const RedisMQ = require("rsmq");
-const rsmq = new RedisMQ({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-  ns: process.env.REDIS_NS,
-});
-
+const { rsmq } = require("../config/redisConfig");
+// console.log(rsmq);
 module.exports.messageHandler = async function (req, res) {
   try {
     let errors = {};

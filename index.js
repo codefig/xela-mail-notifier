@@ -12,7 +12,6 @@ app.get("/", (req, res) => {
 
 app.post("/messages", async (req, res) => {
   messageController.messageHandler(req, res);
-  // res.send("Welldone");
 });
 
 const PORT = process.env.PORT || 3000;
