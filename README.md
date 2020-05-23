@@ -2,7 +2,7 @@
 
 This project is an offline notification service aimed at informing users/reciepients about missed messages on some application, Example of this is when a user leaves their workstation, upon which they receive a message from a co-worker. The application thereby sends an email to the user to notify him/her about an awaiting message which requires their attention, and the contents of the message are sent via email to the required user.
 
-This is a project borne out of learning on System Design: Event Driven Architecture
+This is a project borne out of learning on Event Driven Architecture an example of System Design Approaches:
 
 ## Architecture
 
@@ -24,6 +24,29 @@ This is a project borne out of learning on System Design: Event Driven Architect
 - Database and Database client
   - Redis
   - Mongodb
+
+## Installation
+
+- Clone the repository
+- Install the required packages using Node Package Manager (npm).
+
+```bash
+npm install
+```
+
+## Usage
+
+- Start the web server
+
+```bash
+npm run start
+```
+
+- Start the queue worker service
+
+```bash
+npm run worker
+```
 
 ## Author
 
