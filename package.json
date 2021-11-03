@@ -20,7 +20,7 @@
     "nodemon": "^2.0.3",
     "redis": "^3.0.2",
     "rsmq": "^0.12.2",
-    "validator": "^13.0.0",
+    "validator": "^13.7.0",
     "xoauth2": "^1.2.0"
   },
   "devDependencies": {}
